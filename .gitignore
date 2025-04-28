@@ -1,0 +1,12 @@
+## Dependencies
+node_modules
+
+## Generateds
+/src/generated
+
+## Build
+build
+
+#environment
+.env
+.env.test
