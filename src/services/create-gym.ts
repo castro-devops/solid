@@ -1,6 +1,4 @@
 import { Gym } from "generated/prisma";
-import { UserAlreadyExistsError } from "./errors/user-already-exists.error";
-import { hash } from "bcryptjs";
 import { IGymsRepository } from "@/@types/gyms.repository";
 
 interface IGymServiceRequest {
@@ -23,18 +21,19 @@ export class GymService {
     description,
     phone,
     latitude,
-    longitude
+    longitude,
   } : IGymServiceRequest): Promise<IGymServiceResponse>
   {
-    const user = await this.gymRepository.create({
+    const gym = await this.gymRepository.create({
       title,
       description,
       phone,
-      
+      latitude,
+      longitude,
     });
 
     return {
-      user,
+      gym,
     };
   }
 }
