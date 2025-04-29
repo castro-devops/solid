@@ -13,7 +13,7 @@ describe("Register Services", () => {
     sut = new RegisterService(usersRepository);
   });
 
-  it("should be able te register.", async () => {
+  it("should be able to register.", async () => {
     const { user } = await sut.execute({
       name: "Jon Doe",
       email: "jondoe@example.com",

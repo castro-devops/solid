@@ -3,6 +3,8 @@ import { ICheckInsRepository } from "@/@types/check-ins.repository";
 import { IGymsRepository } from "@/@types/gyms.repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found.error";
 import { getDistanceBetweenCoordinate } from "@/utils/get-distance-between-coordinates";
+import { MaxDistanceError } from "./errors/max-distance.error";
+import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins.error";
 
 interface ICheckInRequest {
   userId: string,
@@ -25,7 +27,7 @@ export class CheckInsService {
     userId,
     gymId,
     userLatitude,
-    userLongitutde
+    userLongitutde,
   }: ICheckInRequest): Promise<ICheckInResponse> {
 
     const gym = await this.gymsRepository.findById(gymId);
@@ -36,12 +38,12 @@ export class CheckInsService {
 
     const distance = getDistanceBetweenCoordinate(
       { latitude: userLatitude, longitude: userLongitutde },
-      { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() })
+      { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() });
 
     const MAX_DISTANCE_IN_KM = 0.1;
     
     if (distance > MAX_DISTANCE_IN_KM) {
-      throw new Error;
+      throw new MaxDistanceError();
     }
 
     const checkInOnSameDate = await this.checkInRepository.findByUserIdOnDate(
@@ -50,7 +52,7 @@ export class CheckInsService {
     );
 
     if (checkInOnSameDate) {
-      throw new Error;
+      throw new MaxNumberOfCheckInsError();
     }
 
     const checkIn = await this.checkInRepository.create({

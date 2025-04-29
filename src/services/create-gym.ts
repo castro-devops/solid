@@ -12,7 +12,7 @@ interface IGymServiceResponse {
   gym: Gym
 }
 
-export class GymService {
+export class GymsService {
 
   constructor( private gymRepository: IGymsRepository ) {}
 

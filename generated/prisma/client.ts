@@ -40,7 +40,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "/workspaces/solid/generated/prisma",
+      "value": "C:\\Users\\breno\\www\\solid\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -49,12 +49,12 @@ const config: runtime.GetPrismaClientConfig = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-1.1.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/workspaces/solid/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\breno\\www\\solid\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../prisma",
@@ -64,11 +64,12 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://postgres:docker@localhost:5432/apisolid?schema=public"
+        "value": null
       }
     }
   },
@@ -91,8 +92,8 @@ config.compilerWasm = undefined
 
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node")
-path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
+path.join(__dirname, "query_engine-windows.dll.node")
+path.join(process.cwd(), "generated/prisma/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma")
 path.join(process.cwd(), "generated/prisma/schema.prisma")

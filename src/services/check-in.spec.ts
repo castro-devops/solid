@@ -3,24 +3,26 @@ import { InMemoryCheckInsRepository } from "@/repositories/mock/in-memory-check-
 import { CheckInsService } from "./check-in";
 import { InMemoryGymsRepository } from "@/repositories/mock/in-memory-gyms.repository";
 import { Decimal } from "@prisma/client/runtime/library";
+import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins.error";
+import { MaxDistanceError } from "./errors/max-distance.error";
 
 let checkInsRepository: InMemoryCheckInsRepository;
 let gymsRepository: InMemoryGymsRepository;
 let sut: CheckInsService;
 
 describe("Register Services", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     checkInsRepository = new InMemoryCheckInsRepository();
     gymsRepository = new InMemoryGymsRepository();
     sut = new CheckInsService(checkInsRepository, gymsRepository);
 
-    gymsRepository.gyms.push({
+    await gymsRepository.create({
       id: "gym-01",
       title: "JavaScript Gym",
       description: "",
       phone: "",
-      latitude: new Decimal(37.4220541),
-      longitude: new Decimal(-122.0853242),
+      latitude: 37.4220541,
+      longitude: -122.0853242,
     });
 
     vi.useFakeTimers();
@@ -59,27 +61,7 @@ describe("Register Services", () => {
         userLatitude: 37.4220541,
         userLongitutde: -122.0853242,
       });
-    }).rejects.toBeInstanceOf(Error);
-  });
-
-  it("should not be able to check in twice in the same day", async () => {
-    vi.setSystemTime(new Date(2025, 0, 1, 5, 0, 0));
-
-    await sut.execute({
-      gymId: "gym-01",
-      userId: "user-id",
-      userLatitude: 37.4220541,
-      userLongitutde: -122.0853242,
-    });
-
-    await expect(async () => {
-      await sut.execute({
-        gymId: "gym-01",
-        userId: "user-id",
-        userLatitude: 37.4220541,
-        userLongitutde: -122.0853242,
-      });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(MaxNumberOfCheckInsError);
   });
   
   it("should be able to check in twice but in different days", async () => {
@@ -122,7 +104,7 @@ describe("Register Services", () => {
         userLatitude: 37.4220541,
         userLongitutde: -122.0853242,
       });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(MaxDistanceError);
   });
 
 });

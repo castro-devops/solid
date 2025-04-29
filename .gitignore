@@ -1,9 +1,9 @@
 ## Dependencies
-generated
 node_modules
 
 ## Generateds
 coverage
+generated
 
 ## Build
 build
