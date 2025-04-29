@@ -4,6 +4,7 @@
   "description": "GymPass Style App",
   "main": "index.js",
   "scripts": {
+    "postinstall": "prisma generate",
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
