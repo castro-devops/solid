@@ -19,7 +19,7 @@ export async function register (request: FastifyRequest, reply: FastifyReply) {
     await registerService.execute({
       name,
       email,
-      password_hash: password,
+      password,
     });
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
