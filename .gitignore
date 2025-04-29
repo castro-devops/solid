@@ -1,8 +1,8 @@
 ## Dependencies
+generated
 node_modules
 
 ## Generateds
-/src/generated
 coverage
 
 ## Build

@@ -1,14 +1,14 @@
 import { IUsersRepository } from "@/@types/users.repository";
 import { User } from "generated/prisma";
-import { UserAlreadyExistsError } from "./user-already-exists.error";
+import { UserAlreadyExistsError } from "./errors/user-already-exists.error";
 import { hash } from "bcryptjs";
 
-interface RegisterServiceRequest {
+interface IRegisterServiceRequest {
   name: string,
   email: string,
   password: string
 }
-interface RegisterServiceResponse {
+interface IRegisterServiceResponse {
   user: User
 }
 
@@ -20,7 +20,7 @@ export class RegisterService {
     name,
     email,
     password,
-  } : RegisterServiceRequest): Promise<RegisterServiceResponse>
+  } : IRegisterServiceRequest): Promise<IRegisterServiceResponse>
   {
 
     const password_hash = await hash(password, 6);
