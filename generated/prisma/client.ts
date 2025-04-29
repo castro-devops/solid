@@ -3,9 +3,9 @@
  * Client
  */
 
-import * as runtime from "@prisma/client/runtime/library";
-import * as process from "node:process";
-import * as path from "node:path";
+import * as runtime from '@prisma/client/runtime/library'
+import * as process from 'node:process'
+import * as path from 'node:path'
 
 
 export type PrismaPromise<T> = runtime.Types.Public.PrismaPromise<T>
@@ -37,41 +37,40 @@ const config: runtime.GetPrismaClientConfig = {
     "name": "client",
     "provider": {
       "fromEnvVar": null,
-      "value": "prisma-client",
+      "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\breno\\www\\solid\\generated\\prisma",
-      "fromEnvVar": null,
+      "value": "/workspaces/solid/generated/prisma",
+      "fromEnvVar": null
     },
     "config": {
-      "engineType": "library",
+      "engineType": "library"
     },
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
-        "native": true,
-      },
+        "value": "debian-openssl-1.1.x",
+        "native": true
+      }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\breno\\www\\solid\\prisma\\schema.prisma",
-    "isCustomOutput": true,
+    "sourceFilePath": "/workspaces/solid/prisma/schema.prisma",
+    "isCustomOutput": true
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
   "engineVersion": "f676762280b54cd07c770017ed3711ddde35f37a",
   "datasourceNames": [
-    "db",
+    "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null,
-      },
-    },
+        "value": "postgres://postgres:docker@localhost:5432/apisolid?schema=public"
+      }
+    }
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            String    @id @default(uuid())\n  name          String\n  email         String    @unique\n  password_hash String\n  created_at    DateTime  @default(now())\n  checkIns      CheckIn[]\n\n  @@map(\"users\")\n}\n\nmodel CheckIn {\n  id           String    @id @default(uuid())\n  created_at   DateTime  @default(now())\n  validated_at DateTime?\n\n  user    User   @relation(fields: [user_id], references: [id])\n  user_id String\n\n  gym    Gym    @relation(fields: [gym_id], references: [id])\n  gym_id String\n\n  @@map(\"check_ins\")\n}\n\nmodel Gym {\n  id          String    @id @default(uuid())\n  title       String\n  description String?\n  phone       String?\n  latitude    Decimal\n  longitude   Decimal\n  checkIns    CheckIn[]\n\n  @@map(\"gyms\")\n}\n",
   "inlineSchemaHash": "ef48dbaa915d6abb2f5bf08f760bc0137c638f432b7b9da3ebcafc72b22e84a1",
@@ -79,24 +78,24 @@ const config: runtime.GetPrismaClientConfig = {
   "runtimeDataModel": {
     "models": {},
     "enums": {},
-    "types": {},
+    "types": {}
   },
-  "dirname": "",
-};
-config.dirname = __dirname;
+  "dirname": ""
+}
+config.dirname = __dirname
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"dbName\":\"users\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"email\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"password_hash\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"created_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"nativeType\":null,\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"checkIns\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CheckIn\",\"nativeType\":null,\"relationName\":\"CheckInToUser\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CheckIn\":{\"dbName\":\"check_ins\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"created_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"nativeType\":null,\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"validated_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"user\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"User\",\"nativeType\":null,\"relationName\":\"CheckInToUser\",\"relationFromFields\":[\"user_id\"],\"relationToFields\":[\"id\"],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"user_id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gym\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Gym\",\"nativeType\":null,\"relationName\":\"CheckInToGym\",\"relationFromFields\":[\"gym_id\"],\"relationToFields\":[\"id\"],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gym_id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"Gym\":{\"dbName\":\"gyms\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"title\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"description\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"phone\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"latitude\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Decimal\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"longitude\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Decimal\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"checkIns\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CheckIn\",\"nativeType\":null,\"relationName\":\"CheckInToGym\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{},\"types\":{}}");
-config.engineWasm = undefined;
-config.compilerWasm = undefined;
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"dbName\":\"users\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"email\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"password_hash\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"created_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"nativeType\":null,\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"checkIns\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CheckIn\",\"nativeType\":null,\"relationName\":\"CheckInToUser\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CheckIn\":{\"dbName\":\"check_ins\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"created_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"DateTime\",\"nativeType\":null,\"default\":{\"name\":\"now\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"validated_at\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"user\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"User\",\"nativeType\":null,\"relationName\":\"CheckInToUser\",\"relationFromFields\":[\"user_id\"],\"relationToFields\":[\"id\"],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"user_id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gym\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Gym\",\"nativeType\":null,\"relationName\":\"CheckInToGym\",\"relationFromFields\":[\"gym_id\"],\"relationToFields\":[\"id\"],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gym_id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"Gym\":{\"dbName\":\"gyms\",\"schema\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"String\",\"nativeType\":null,\"default\":{\"name\":\"uuid\",\"args\":[4]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"title\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"description\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"phone\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"latitude\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Decimal\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"longitude\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Decimal\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"checkIns\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CheckIn\",\"nativeType\":null,\"relationName\":\"CheckInToGym\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{},\"types\":{}}")
+config.engineWasm = undefined
+config.compilerWasm = undefined
 
 
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "generated/prisma/query_engine-windows.dll.node");
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node")
+path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
 // file annotations for bundling tools to include these files
-path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "generated/prisma/schema.prisma");
+path.join(__dirname, "schema.prisma")
+path.join(process.cwd(), "generated/prisma/schema.prisma")
 
 
 interface PrismaClientConstructor {
@@ -115,7 +114,7 @@ interface PrismaClientConstructor {
    */
   new <
     ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-    U = "log" extends keyof ClientOptions ? ClientOptions["log"] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions["log"]> : never : never,
+    U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
     ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs
   >(options?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>): PrismaClient<ClientOptions, U, ExtArgs>
 }
@@ -135,12 +134,12 @@ interface PrismaClientConstructor {
  */
 export interface PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = "log" extends keyof ClientOptions ? ClientOptions["log"] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions["log"]> : never : never,
+  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs
 > {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["other"] }
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
-  $on<V extends U>(eventType: V, callback: (event: V extends "query" ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
 
   /**
    * Connect with the database
@@ -259,7 +258,7 @@ export interface PrismaClient<
   get gym(): Prisma.GymDelegate<ExtArgs, ClientOptions>;
 }
 
-export const PrismaClient = runtime.getPrismaClient(config) as unknown as PrismaClientConstructor;
+export const PrismaClient = runtime.getPrismaClient(config) as unknown as PrismaClientConstructor
 
 export namespace Prisma {
   export type DMMF = typeof runtime.DMMF
@@ -269,35 +268,35 @@ export namespace Prisma {
   /**
    * Validator
    */
-  export const validator = runtime.Public.validator;
+  export const validator = runtime.Public.validator
 
   /**
    * Prisma Errors
    */
 
-  export const PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
+  export const PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
   export type PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
 
-  export const PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
+  export const PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
   export type PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
 
-  export const PrismaClientRustPanicError = runtime.PrismaClientRustPanicError;
+  export const PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export type PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
 
-  export const PrismaClientInitializationError = runtime.PrismaClientInitializationError;
+  export const PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export type PrismaClientInitializationError = runtime.PrismaClientInitializationError
 
-  export const PrismaClientValidationError = runtime.PrismaClientValidationError;
+  export const PrismaClientValidationError = runtime.PrismaClientValidationError
   export type PrismaClientValidationError = runtime.PrismaClientValidationError
 
   /**
    * Re-export of sql-template-tag
    */
-  export const sql = runtime.sqltag;
-  export const empty = runtime.empty;
-  export const join = runtime.join;
-  export const raw = runtime.raw;
-  export const Sql = runtime.Sql;
+  export const sql = runtime.sqltag
+  export const empty = runtime.empty
+  export const join = runtime.join
+  export const raw = runtime.raw
+  export const Sql = runtime.Sql
   export type Sql = runtime.Sql
 
 
@@ -305,7 +304,7 @@ export namespace Prisma {
   /**
    * Decimal.js
    */
-  export const Decimal = runtime.Decimal;
+  export const Decimal = runtime.Decimal
   export type Decimal = runtime.Decimal
 
   export type DecimalJsLike = runtime.DecimalJsLike
@@ -322,7 +321,7 @@ export namespace Prisma {
   * Extensions
   */
   export type Extension = runtime.Types.Extensions.UserArgs
-  export const getExtensionContext = runtime.Extensions.getExtensionContext;
+  export const getExtensionContext = runtime.Extensions.getExtensionContext
   export type Args<T, F extends runtime.Operation> = runtime.Types.Public.Args<T, F>
   export type Payload<T, F extends runtime.Operation = never> = runtime.Types.Public.Payload<T, F>
   export type Result<T, A, F extends runtime.Operation> = runtime.Types.Public.Result<T, A, F>
@@ -339,8 +338,8 @@ export namespace Prisma {
    */
   export const prismaVersion: PrismaVersion = {
     client: "6.6.0",
-    engine: "f676762280b54cd07c770017ed3711ddde35f37a",
-  };
+    engine: "f676762280b54cd07c770017ed3711ddde35f37a"
+  }
 
   /**
    * Utility Types
@@ -358,28 +357,28 @@ export namespace Prisma {
     DbNull: runtime.objectEnumValues.classes.DbNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.DbNull),
     JsonNull: runtime.objectEnumValues.classes.JsonNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.JsonNull),
     AnyNull: runtime.objectEnumValues.classes.AnyNull as (new (secret: never) => typeof runtime.objectEnumValues.instances.AnyNull),
-  };
+  }
 
   /**
    * Helper for filtering JSON entries that have `null` on the database (empty on the db)
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const DbNull = runtime.objectEnumValues.instances.DbNull;
+  export const DbNull = runtime.objectEnumValues.instances.DbNull
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const JsonNull = runtime.objectEnumValues.instances.JsonNull;
+  export const JsonNull = runtime.objectEnumValues.instances.JsonNull
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
    *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
-  export const AnyNull = runtime.objectEnumValues.instances.AnyNull;
+  export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
   type SelectAndInclude = {
     select: any
@@ -417,9 +416,9 @@ export namespace Prisma {
     [key in keyof T]: key extends keyof U ? T[key] : never
   } &
     (T extends SelectAndInclude
-      ? "Please either choose `select` or `include`."
+      ? 'Please either choose `select` or `include`.'
       : T extends SelectAndOmit
-        ? "Please either choose `select` or `omit`."
+        ? 'Please either choose `select` or `omit`.'
         : {})
 
   /**
@@ -453,7 +452,7 @@ export namespace Prisma {
   ? False
   : T extends Uint8Array
   ? False
-  : T extends bigint
+  : T extends BigInt
   ? False
   : T extends object
   ? True
@@ -594,13 +593,13 @@ export namespace Prisma {
 
   type FieldPaths<
     T,
-    U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
   > = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
     [K in keyof T]: Or<
-      Or<Extends<"OR", K>, Extends<"AND", K>>,
-      Extends<"NOT", K>
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
     > extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
@@ -637,10 +636,10 @@ export namespace Prisma {
 
 
   export const ModelName = {
-    User: "User",
-    CheckIn: "CheckIn",
-    Gym: "Gym",
-  } as const;
+    User: 'User',
+    CheckIn: 'CheckIn',
+    Gym: 'Gym'
+  } as const
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
@@ -650,7 +649,7 @@ export namespace Prisma {
   }
 
   export interface TypeMapCb<ClientOptions = {}> extends runtime.Types.Utils.Fn<{extArgs: runtime.Types.Extensions.InternalArgs }, runtime.Types.Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this["params"]["extArgs"], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
   export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
@@ -908,9 +907,9 @@ export namespace Prisma {
       }
     }
   }
-  export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", Prisma.TypeMapCb, runtime.Types.Extensions.DefaultArgs>;
+  export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", Prisma.TypeMapCb, runtime.Types.Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
-  export type ErrorFormat = "pretty" | "colorless" | "minimal"
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
     /**
      * Overwrites the datasource url from your schema.prisma file
@@ -974,13 +973,13 @@ export namespace Prisma {
   }
 
   /* Types for Logging */
-  export type LogLevel = "info" | "query" | "warn" | "error"
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
   export type LogDefinition = {
     level: LogLevel
-    emit: "stdout" | "event"
+    emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T["emit"] extends "event" ? T["level"] : never : never
+  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
   export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
     GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
     : never
@@ -1002,27 +1001,27 @@ export namespace Prisma {
 
 
   export type PrismaAction =
-    | "findUnique"
-    | "findUniqueOrThrow"
-    | "findMany"
-    | "findFirst"
-    | "findFirstOrThrow"
-    | "create"
-    | "createMany"
-    | "createManyAndReturn"
-    | "update"
-    | "updateMany"
-    | "updateManyAndReturn"
-    | "upsert"
-    | "delete"
-    | "deleteMany"
-    | "executeRaw"
-    | "queryRaw"
-    | "aggregate"
-    | "count"
-    | "runCommandRaw"
-    | "findRaw"
-    | "groupBy"
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
 
   /**
    * These options are being passed into the middleware as "params"
@@ -1234,7 +1233,7 @@ export namespace Prisma {
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
@@ -1269,9 +1268,9 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T["by"]> &
+      PickEnumerable<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], UserGroupByOutputType[P]>
@@ -1341,12 +1340,12 @@ export namespace Prisma {
   export type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$UserPayload, S>
 
   export type UserCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: UserCountAggregateInputType | true
     }
 
   export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["User"], meta: { name: "User" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -1605,10 +1604,10 @@ export namespace Prisma {
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends runtime.Types.Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends runtime.Types.Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
     >
 
@@ -1659,20 +1658,20 @@ export namespace Prisma {
     groupBy<
       T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs["orderBy"] }
-        : { orderBy?: UserGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -1681,13 +1680,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -1695,9 +1694,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -1705,7 +1704,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -1758,11 +1757,11 @@ export namespace Prisma {
    * Fields of the User model
    */
   export interface UserFieldRefs {
-    readonly id: FieldRef<"User", "String">
-    readonly name: FieldRef<"User", "String">
-    readonly email: FieldRef<"User", "String">
-    readonly password_hash: FieldRef<"User", "String">
-    readonly created_at: FieldRef<"User", "DateTime">
+    readonly id: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly password_hash: FieldRef<"User", 'String'>
+    readonly created_at: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2304,7 +2303,7 @@ export namespace Prisma {
   }
 
   export type GetCheckInAggregateType<T extends CheckInAggregateArgs> = {
-        [P in keyof T & keyof AggregateCheckIn]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateCheckIn]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateCheckIn[P]>
@@ -2339,9 +2338,9 @@ export namespace Prisma {
 
   type GetCheckInGroupByPayload<T extends CheckInGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CheckInGroupByOutputType, T["by"]> &
+      PickEnumerable<CheckInGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CheckInGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof CheckInGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], CheckInGroupByOutputType[P]>
@@ -2422,12 +2421,12 @@ export namespace Prisma {
   export type CheckInGetPayload<S extends boolean | null | undefined | CheckInDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$CheckInPayload, S>
 
   export type CheckInCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-    Omit<CheckInFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<CheckInFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: CheckInCountAggregateInputType | true
     }
 
   export interface CheckInDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["CheckIn"], meta: { name: "CheckIn" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CheckIn'], meta: { name: 'CheckIn' } }
     /**
      * Find zero or one CheckIn that matches the filter.
      * @param {CheckInFindUniqueArgs} args - Arguments to find a CheckIn
@@ -2686,10 +2685,10 @@ export namespace Prisma {
     count<T extends CheckInCountArgs>(
       args?: Subset<T, CheckInCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends runtime.Types.Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends runtime.Types.Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], CheckInCountAggregateOutputType>
+          : GetScalarType<T['select'], CheckInCountAggregateOutputType>
         : number
     >
 
@@ -2740,20 +2739,20 @@ export namespace Prisma {
     groupBy<
       T extends CheckInGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CheckInGroupByArgs["orderBy"] }
-        : { orderBy?: CheckInGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: CheckInGroupByArgs['orderBy'] }
+        : { orderBy?: CheckInGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -2762,13 +2761,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -2776,9 +2775,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -2786,7 +2785,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -2840,11 +2839,11 @@ export namespace Prisma {
    * Fields of the CheckIn model
    */
   export interface CheckInFieldRefs {
-    readonly id: FieldRef<"CheckIn", "String">
-    readonly created_at: FieldRef<"CheckIn", "DateTime">
-    readonly validated_at: FieldRef<"CheckIn", "DateTime">
-    readonly user_id: FieldRef<"CheckIn", "String">
-    readonly gym_id: FieldRef<"CheckIn", "String">
+    readonly id: FieldRef<"CheckIn", 'String'>
+    readonly created_at: FieldRef<"CheckIn", 'DateTime'>
+    readonly validated_at: FieldRef<"CheckIn", 'DateTime'>
+    readonly user_id: FieldRef<"CheckIn", 'String'>
+    readonly gym_id: FieldRef<"CheckIn", 'String'>
   }
     
 
@@ -3410,7 +3409,7 @@ export namespace Prisma {
   }
 
   export type GetGymAggregateType<T extends GymAggregateArgs> = {
-        [P in keyof T & keyof AggregateGym]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateGym]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateGym[P]>
@@ -3450,9 +3449,9 @@ export namespace Prisma {
 
   type GetGymGroupByPayload<T extends GymGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<GymGroupByOutputType, T["by"]> &
+      PickEnumerable<GymGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof GymGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof GymGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], GymGroupByOutputType[P]>
@@ -3527,12 +3526,12 @@ export namespace Prisma {
   export type GymGetPayload<S extends boolean | null | undefined | GymDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$GymPayload, S>
 
   export type GymCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-    Omit<GymFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<GymFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: GymCountAggregateInputType | true
     }
 
   export interface GymDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Gym"], meta: { name: "Gym" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Gym'], meta: { name: 'Gym' } }
     /**
      * Find zero or one Gym that matches the filter.
      * @param {GymFindUniqueArgs} args - Arguments to find a Gym
@@ -3791,10 +3790,10 @@ export namespace Prisma {
     count<T extends GymCountArgs>(
       args?: Subset<T, GymCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends runtime.Types.Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends runtime.Types.Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], GymCountAggregateOutputType>
+          : GetScalarType<T['select'], GymCountAggregateOutputType>
         : number
     >
 
@@ -3845,20 +3844,20 @@ export namespace Prisma {
     groupBy<
       T extends GymGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GymGroupByArgs["orderBy"] }
-        : { orderBy?: GymGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: GymGroupByArgs['orderBy'] }
+        : { orderBy?: GymGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -3867,13 +3866,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3881,9 +3880,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3891,7 +3890,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -3944,12 +3943,12 @@ export namespace Prisma {
    * Fields of the Gym model
    */
   export interface GymFieldRefs {
-    readonly id: FieldRef<"Gym", "String">
-    readonly title: FieldRef<"Gym", "String">
-    readonly description: FieldRef<"Gym", "String">
-    readonly phone: FieldRef<"Gym", "String">
-    readonly latitude: FieldRef<"Gym", "Decimal">
-    readonly longitude: FieldRef<"Gym", "Decimal">
+    readonly id: FieldRef<"Gym", 'String'>
+    readonly title: FieldRef<"Gym", 'String'>
+    readonly description: FieldRef<"Gym", 'String'>
+    readonly phone: FieldRef<"Gym", 'String'>
+    readonly latitude: FieldRef<"Gym", 'Decimal'>
+    readonly longitude: FieldRef<"Gym", 'Decimal'>
   }
     
 
@@ -4385,69 +4384,69 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel = runtime.makeStrictEnum({
-    ReadUncommitted: "ReadUncommitted",
-    ReadCommitted: "ReadCommitted",
-    RepeatableRead: "RepeatableRead",
-    Serializable: "Serializable",
-  } as const);
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  } as const)
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
   export const UserScalarFieldEnum = {
-    id: "id",
-    name: "name",
-    email: "email",
-    password_hash: "password_hash",
-    created_at: "created_at",
-  } as const;
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    password_hash: 'password_hash',
+    created_at: 'created_at'
+  } as const
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const CheckInScalarFieldEnum = {
-    id: "id",
-    created_at: "created_at",
-    validated_at: "validated_at",
-    user_id: "user_id",
-    gym_id: "gym_id",
-  } as const;
+    id: 'id',
+    created_at: 'created_at',
+    validated_at: 'validated_at',
+    user_id: 'user_id',
+    gym_id: 'gym_id'
+  } as const
 
   export type CheckInScalarFieldEnum = (typeof CheckInScalarFieldEnum)[keyof typeof CheckInScalarFieldEnum]
 
 
   export const GymScalarFieldEnum = {
-    id: "id",
-    title: "title",
-    description: "description",
-    phone: "phone",
-    latitude: "latitude",
-    longitude: "longitude",
-  } as const;
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    phone: 'phone',
+    latitude: 'latitude',
+    longitude: 'longitude'
+  } as const
 
   export type GymScalarFieldEnum = (typeof GymScalarFieldEnum)[keyof typeof GymScalarFieldEnum]
 
 
   export const SortOrder = {
-    asc: "asc",
-    desc: "desc",
-  } as const;
+    asc: 'asc',
+    desc: 'desc'
+  } as const
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
   export const QueryMode = {
-    default: "default",
-    insensitive: "insensitive",
-  } as const;
+    default: 'default',
+    insensitive: 'insensitive'
+  } as const
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   export const NullsOrder = {
-    first: "first",
-    last: "last",
-  } as const;
+    first: 'first',
+    last: 'last'
+  } as const
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
@@ -4460,56 +4459,56 @@ export namespace Prisma {
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String">
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String[]">
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime">
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime[]">
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
   /**
    * Reference to a field of type 'Decimal'
    */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Decimal">
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
   /**
    * Reference to a field of type 'Decimal[]'
    */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Decimal[]">
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int">
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int[]">
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
