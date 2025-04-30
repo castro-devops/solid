@@ -5,11 +5,11 @@
 ## 1 RFs (Requisitos Funcionais)
 - [x] 1.1 Deve ser possível se cadastrar;
 - [x] 1.2 Deve ser possível autenticar-se;
-- [ ] 1.3 Deve ser possível obter o perfil de um usuário logado;
+- [x] 1.3 Deve ser possível obter o perfil de um usuário logado;
 - [x] 1.4 Deve ser possível obter o número de check-ins realizado pelo usuário logado;
 - [x] 1.5 Deve ser possível o usuário obter o seu histórico de check-ins;
-- [ ] 1.6 Deve ser possível o usuário buscar academias próximas;
-- [ ] 1.7 Deve ser possível o usuário buscar academias pelo nome;
+- [x] 1.6 Deve ser possível o usuário buscar academias próximas (até 10km);
+- [x] 1.7 Deve ser possível o usuário buscar academias pelo nome;
 - [x] 1.8 Deve ser possível o usuário realizar check-in em uma academia;
 - [ ] 1.9 Deve ser possível validar o check-in de um usuário.
 - [x] 1.10 Deve ser possível cadastrar uma academia.
