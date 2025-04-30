@@ -10,7 +10,7 @@ let checkInsRepository: InMemoryCheckInsRepository;
 let gymsRepository: InMemoryGymsRepository;
 let sut: CheckInsService;
 
-describe("Register Services", () => {
+describe("Check-in Services", () => {
   beforeEach(async () => {
     checkInsRepository = new InMemoryCheckInsRepository();
     gymsRepository = new InMemoryGymsRepository();
@@ -36,7 +36,7 @@ describe("Register Services", () => {
 
     const { checkIn } = await sut.execute({
       gymId: "gym-01",
-      userId: "user-id",
+      userId: "user-01",
       userLatitude: 37.4220541,
       userLongitutde: -122.0853242,
     });
@@ -49,7 +49,7 @@ describe("Register Services", () => {
 
     await sut.execute({
       gymId: "gym-01",
-      userId: "user-id",
+      userId: "user-01",
       userLatitude: 37.4220541,
       userLongitutde: -122.0853242,
     });
@@ -57,7 +57,7 @@ describe("Register Services", () => {
     await expect(async () => {
       await sut.execute({
         gymId: "gym-01",
-        userId: "user-id",
+        userId: "user-01",
         userLatitude: 37.4220541,
         userLongitutde: -122.0853242,
       });
@@ -69,7 +69,7 @@ describe("Register Services", () => {
 
     await sut.execute({
       gymId: "gym-01",
-      userId: "user-id",
+      userId: "user-01",
       userLatitude: 37.4220541,
       userLongitutde: -122.0853242,
     });
@@ -78,7 +78,7 @@ describe("Register Services", () => {
 
     const { checkIn } = await sut.execute({
       gymId: "gym-01",
-      userId: "user-id",
+      userId: "user-01",
       userLatitude: 37.4220541,
       userLongitutde: -122.0853242,
     });
@@ -100,7 +100,7 @@ describe("Register Services", () => {
     await expect(async () => {
       await sut.execute({
         gymId: "gym-02",
-        userId: "user-id",
+        userId: "user-01",
         userLatitude: 37.4220541,
         userLongitutde: -122.0853242,
       });

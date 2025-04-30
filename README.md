@@ -11,7 +11,7 @@
 - [x] 1.6 Deve ser possível o usuário buscar academias próximas (até 10km);
 - [x] 1.7 Deve ser possível o usuário buscar academias pelo nome;
 - [x] 1.8 Deve ser possível o usuário realizar check-in em uma academia;
-- [ ] 1.9 Deve ser possível validar o check-in de um usuário.
+- [x] 1.9 Deve ser possível validar o check-in de um usuário.
 - [x] 1.10 Deve ser possível cadastrar uma academia.
 
 ## 2 RNs (Regras de Negócio)

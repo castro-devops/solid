@@ -7,6 +7,12 @@ export class InMemoryCheckInsRepository implements ICheckInsRepository {
 
   public checkIns: CheckIn[] = [];
 
+  async findById(id: string) {
+    const checkIns = this.checkIns.find(check => check.id === id);
+    if (!checkIns) return null;
+    return checkIns;
+  }
+
   async findByUserIdOnDate(userId: string, date: Date) {
 
     const startOfTheDay = dayjs(date).startOf("date");
@@ -48,5 +54,15 @@ export class InMemoryCheckInsRepository implements ICheckInsRepository {
     return this.checkIns
       .filter(checkIn => checkIn.user_id === userId)
       .slice((page - 1) * 20, page + page * 20);
+  }
+
+  async save(checkIn: CheckIn) {
+    const checkInIndex = this.checkIns.findIndex(check => check.id === checkIn.id);
+
+    if (checkInIndex >= 0) {
+      this.checkIns[checkInIndex] = checkIn;
+    }
+
+    return checkIn;
   }
 }
