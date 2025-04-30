@@ -3,6 +3,6 @@ import { RegisterService } from "../register";
 
 export function makeRegisterService() {
   const prismaUsersRepository = new PrismaUsersRepository();
-  const registerService = new RegisterService(prismaUsersRepository);
-  return registerService;
+  const service = new RegisterService(prismaUsersRepository);
+  return service;
 }

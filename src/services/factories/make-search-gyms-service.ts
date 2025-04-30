@@ -3,6 +3,6 @@ import { SearchGymsService } from "../search-gyms";
 
 export function makeSearchGymsService() {
   const gymsRepository = new PrismaGymsRepository();
-  const searchGymsService = new SearchGymsService(gymsRepository);
-  return searchGymsService;
+  const service = new SearchGymsService(gymsRepository);
+  return service;
 }

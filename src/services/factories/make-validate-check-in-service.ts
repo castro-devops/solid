@@ -3,6 +3,6 @@ import { ValidateCheckInsService } from "../validate-check-in";
 
 export function makeValidateCheckInService() {
   const checkInsRepository = new PrismaCheckInsRepository();
-  const validateCheckInService = new ValidateCheckInsService(checkInsRepository);
-  return validateCheckInService;
+  const service = new ValidateCheckInsService(checkInsRepository);
+  return service;
 }

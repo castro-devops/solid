@@ -3,6 +3,6 @@ import { PrismaCheckInsRepository } from "@/repositories/prisma/prisma-check-ins
 
 export function makeFetchUserCheckInsHistoryService() {
   const prismaCheckInsRepository = new PrismaCheckInsRepository();
-  const fetchUserCheckInsRepository = new FetchUserCheckInsHistoryService(prismaCheckInsRepository);
-  return fetchUserCheckInsRepository;
+  const service = new FetchUserCheckInsHistoryService(prismaCheckInsRepository);
+  return service;
 }

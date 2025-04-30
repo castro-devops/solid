@@ -5,6 +5,6 @@ import { PrismaGymsRepository } from "@/repositories/prisma/prisma-gyms.reposito
 export function makeCheckInService() {
   const prismaCheckInsRepository = new PrismaCheckInsRepository();
   const prismaGymsRepository = new PrismaGymsRepository();
-  const checkInsService = new CheckInsService(prismaCheckInsRepository ,prismaGymsRepository);
-  return checkInsService;
+  const service = new CheckInsService(prismaCheckInsRepository ,prismaGymsRepository);
+  return service;
 }

@@ -3,6 +3,6 @@ import { GetUserMetricsService } from "../get-user-metrics";
 
 export function makeGetUserMetricsService() {
   const checkInsRepository = new PrismaCheckInsRepository();
-  const getUserMetricsService = new GetUserMetricsService(checkInsRepository);
-  return getUserMetricsService;
+  const service = new GetUserMetricsService(checkInsRepository);
+  return service;
 }

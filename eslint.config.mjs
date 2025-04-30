@@ -15,7 +15,7 @@ export default defineConfig([
       "indent": ["error", 2],
       "comma-dangle": ["error", "always-multiline"],
       "eol-last": ["error", "always"],
-      "no-useless-constructor": "off"
+      "no-useless-constructor": "off",
     },
   },
   { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.node } },
