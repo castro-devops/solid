@@ -27,14 +27,10 @@ export class AuthenticateService {
       throw new InvalidCredentialsError();
     }
 
-    console.log("user", user);
-
     const doesPasswordMatches = await compare(
       password,
       user.password_hash,
     );
-
-    console.log("doesPasswordMatches", doesPasswordMatches);
 
     if (!doesPasswordMatches) {
       throw new InvalidCredentialsError();
