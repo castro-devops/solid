@@ -5,7 +5,7 @@ export async function verifyJWT(
 ){
   try {
     await request.jwtVerify();
-  } catch (_) {
+  } catch {
     return reply.status(401).send({ ok: false, message: "Não autorizado." });
   }
 }

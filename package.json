@@ -4,7 +4,6 @@
   "description": "GymPass Style App",
   "main": "index.js",
   "scripts": {
-    "postinstall": "prisma generate prisma migrate dev",
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
@@ -36,6 +35,7 @@
     "vitest": "3.1.2"
   },
   "dependencies": {
+    "@fastify/cookie": "11.0.2",
     "@fastify/jwt": "9.1.0",
     "@prisma/client": "6.6.0",
     "bcryptjs": "3.0.2",

@@ -28,10 +28,11 @@ describe("Authenticate Controller (e2e)", () => {
         password: "123456",
       });
 
-    const { token } = response.body;
+    const { token, ok } = response.body;
 
     expect(response.statusCode).toEqual(200);
     expect(token).toEqual(expect.any(String));
+    expect(ok).toEqual(true);
   });
 
   it.skip("Should not be able authenticate with invalid data.", async () => {
