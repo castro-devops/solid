@@ -18,13 +18,15 @@
 - [x] 2.1 O usuário não pode se cadastrar com e-mail ou cpf duplicado; (1.1)
 - [x] 2.8.1 O usuário não pode fazer check-in se não estiver perto (100m) da academia; (1.8)
 - [X] 2.8.2 O usuário não pode fazer +1 check-ins no mesmo dia; (1.8)
-- [ ] 2.9.1 O check-in só pode ser vaidado até 20 minutos após ser criado; (1.9)
-- [ ] 2.9.2 O check-int só pode ser validado por administradores; (1.9)
-- [ ] 2.10 A academia só pode ser cadastrada por administradores; (1.10)
+- [x] 2.9.1 O check-in só pode ser vaidado até 20 minutos após ser criado; (1.9)
+- [x] 2.9.2 O check-int só pode ser validado por administradores; (1.9)
+- [x] 2.10 A academia só pode ser cadastrada por administradores; (1.10)
 
 ## 3 RNFs (Requisitos não funcionais)
 
 - [x] 3.1 A senha do usuário precisa estar criptograda;
 - [x] 3.2 Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [x] 3.3 Toda lista de dados precisam estar paginadas com 20 itens por páginas;
-- [ ] 3.4 O usuário deve ser identificado por um JWT (JSON Web Token);
+- [x] 3.4 O usuário deve ser identificado por um JWT (JSON Web Token);
+
+## AGORA SUPERAR O DDD E DEPOIS PARTIU NESTJS
