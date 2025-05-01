@@ -19,13 +19,14 @@ export async function register (request: FastifyRequest, reply: FastifyReply) {
       email,
       password,
     });
-  } catch (err) {
-    if (err instanceof UserAlreadyExistsError) {
-      return reply.status(409).send({ ok: false, "message": err.message });
+  } catch (error) {
+    if (error instanceof UserAlreadyExistsError) {
+      return reply.status(409).send({ ok: false, "message": error.message });
     }
     
-    throw err;
+    const err = error as Error;
+    throw new Error("Error: " + err.message);
   }
   
-  return reply.status(201).send();
+  return reply.status(201).send({ ok: true });
 }

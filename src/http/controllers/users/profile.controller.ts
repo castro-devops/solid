@@ -9,9 +9,9 @@ export async function profile (request: FastifyRequest, reply: FastifyReply) {
   });
 
   return reply.status(200).send({
+    ok: true,
     user: {
       ...user,
-      email: undefined,
       password_hash: undefined,
     },
   });

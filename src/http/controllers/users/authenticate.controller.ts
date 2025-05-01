@@ -24,13 +24,13 @@ export async function authenticate (request: FastifyRequest, reply: FastifyReply
       },
     });
   
-    return reply.status(200).send({ token });
+    return reply.status(200).send({ ok: true, token });
   
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return reply.status(400).send({ ok: false, "message": err.message });
     }
     
-    throw err;
+    return err;
   }
 }
